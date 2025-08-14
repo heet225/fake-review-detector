@@ -5,18 +5,18 @@ import string
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
-# Download required nltk data
+
 nltk.download('stopwords')
 nltk.download('punkt')
 nltk.download('wordnet')
 
-# Load trained model & vectorizer
+
 with open("svm_model.pkl", "rb") as f:
     model = pickle.load(f)
 with open("vectorizer.pkl", "rb") as f:
     cv = pickle.load(f)
 
-# Preprocessing (must match training)
+
 stop_words = set(stopwords.words("english"))
 lemmatizer = WordNetLemmatizer()
 
@@ -27,7 +27,7 @@ def preprocess(text):
     words = [lemmatizer.lemmatize(w) for w in words if w not in stop_words]
     return " ".join(words)
 
-# Flask app
+
 app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
@@ -38,7 +38,6 @@ def index():
         review_clean = preprocess(review)
         review_vector = cv.transform([review_clean])
 
-        # Map "og" -> Real, "cg" -> Fake
         label_map = {"OG": "Real", "CG": "Fake"}
         prediction_raw = model.predict(review_vector)[0]
         prediction = label_map.get(prediction_raw, prediction_raw)
