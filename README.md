@@ -52,26 +52,65 @@ fake-review-detector/
 
 ## Usage
 
-### Option 1: Web Application (Recommended)
+### Option 1: Automated Setup (Recommended - Works on all platforms)
 
-1. **Navigate to the project directory**:
+**Using Python script (Windows, macOS, Linux):**
+```bash
+python3 run.py
+```
+or
+```bash
+python run.py
+```
+
+This script will automatically:
+- Check your Python version
+- Install all required dependencies
+- Verify model files exist
+- Start the Flask web application
+
+### Option 2: Using Shell Script (macOS/Linux only)
+
+```bash
+./run.sh
+```
+
+### Option 3: Manual Setup
+
+1. **Install dependencies first**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+   or
+   ```bash
+   pip3 install -r requirements.txt
+   ```
+
+2. **Navigate to the project directory**:
    ```bash
    cd project
    ```
 
-2. **Run the Flask application**:
+3. **Run the Flask application**:
    ```bash
    python3 app.py
    ```
 
-3. **Open your browser** and visit:
+4. **Open your browser** and visit:
    ```
    http://127.0.0.1:5000
    ```
 
-4. **Enter a review** in the text box and click "Check Review" to see if it's genuine or fake.
+5. **Enter a review** in the text box and click "Check Review" to see if it's genuine or fake.
 
-### Option 2: Command-Line Interface
+### Option 4: Command-Line Interface
+
+**Important**: Install dependencies first before using CLI mode:
+```bash
+pip install -r requirements.txt
+```
+
+Then:
 
 1. **Navigate to the project directory**:
    ```bash
@@ -159,10 +198,38 @@ The model is trained on a dataset of labeled product reviews:
 
 ## Troubleshooting
 
+### ❌ ModuleNotFoundError: No module named 'flask' (or sklearn, pandas, nltk)
+
+**Solution**: You need to install dependencies first!
+
+```bash
+# Try one of these commands:
+pip install -r requirements.txt
+# or
+pip3 install -r requirements.txt
+# or
+python -m pip install -r requirements.txt
+# or
+python3 -m pip install -r requirements.txt
+```
+
+**Best Solution**: Use the automated startup script:
+```bash
+python3 run.py
+```
+
+This script automatically installs dependencies for you.
+
 ### Port Already in Use
-If port 5000 is already in use, you can change it in `app.py`:
+If port 5000 is already in use, you can change it in `project/app.py`:
 ```python
 app.run(debug=True, port=5001)  # Change port to 5001 or any available port
+```
+
+### Permission Denied on Installation
+If you get permission errors when installing packages:
+```bash
+pip install --user -r requirements.txt
 ```
 
 ### NLTK Data Not Found
@@ -172,6 +239,17 @@ import nltk
 nltk.download('stopwords')
 nltk.download('punkt')
 nltk.download('wordnet')
+```
+
+### Script Won't Run (./run.sh: Permission denied)
+Make the script executable:
+```bash
+chmod +x run.sh
+```
+
+Or use the Python script instead (works on all platforms):
+```bash
+python3 run.py
 ```
 
 ## Future Improvements
