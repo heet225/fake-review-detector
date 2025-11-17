@@ -1,0 +1,68 @@
+==========================================
+FAKE REVIEW DETECTOR - TESTING INSTRUCTIONS
+==========================================
+
+To test if the application is working correctly:
+
+METHOD 1: AUTOMATED STARTUP (RECOMMENDED)
+------------------------------------------
+Run this command in the repository root:
+
+    python3 run.py
+
+or
+
+    python run.py
+
+
+The script will:
+✓ Check your Python version (needs 3.7+)
+✓ Install dependencies automatically
+✓ Verify model files exist
+✓ Start the Flask server
+
+Then open: http://127.0.0.1:5000
+
+
+METHOD 2: SHELL SCRIPT (macOS/Linux only)
+------------------------------------------
+Run this command:
+
+    ./run.sh
+
+Then open: http://127.0.0.1:5000
+
+
+METHOD 3: MANUAL INSTALLATION
+------------------------------
+If automated scripts don't work:
+
+Step 1: Install dependencies
+    pip install -r requirements.txt
+    or
+    pip3 install -r requirements.txt
+
+Step 2: Start the app
+    cd project
+    python3 app.py
+
+Step 3: Open browser
+    http://127.0.0.1:5000
+
+
+TROUBLESHOOTING
+---------------
+If you see: "ModuleNotFoundError: No module named 'flask'"
+→ You need to install dependencies first!
+  Run: pip install -r requirements.txt
+
+If you see: "Permission denied"
+→ Make script executable: chmod +x run.py
+  Or use: python3 run.py
+
+If port 5000 is in use:
+→ Edit project/app.py and change port to 5001
+
+For more help, see README.md
+
+==========================================
